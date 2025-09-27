@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duqdowwlyqbub"
-path="res://.godot/imported/rectangle.png-4c17c47eaf80677b6e12b5b6b5a4f288.ctex"
+uid="uid://btvc6q2cydwks"
+path="res://.godot/imported/leverup.png-6fa8030af2f64d0cf8ce98549df349f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Testing/rectangle.png"
-dest_files=["res://.godot/imported/rectangle.png-4c17c47eaf80677b6e12b5b6b5a4f288.ctex"]
+source_file="res://Assets/UI/Lever/leverup.png"
+dest_files=["res://.godot/imported/leverup.png-6fa8030af2f64d0cf8ce98549df349f7.ctex"]
 
 [params]
 

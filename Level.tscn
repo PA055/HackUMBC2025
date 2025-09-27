@@ -9,5 +9,14 @@
 position = Vector2(414, 149)
 
 [node name="TogglePlatform" parent="." instance=ExtResource("2_t7iv1")]
-position = Vector2(430, 314)
-size = Vector2(200, 40)
+position = Vector2(378, 374)
+rotation = 0.37350047
+platformRed = true
+
+[node name="TogglePlatform2" parent="." instance=ExtResource("2_t7iv1")]
+position = Vector2(650, 531)
+size = Vector2(150, 30)
+
+[node name="TogglePlatform3" parent="." instance=ExtResource("2_t7iv1")]
+position = Vector2(419, 524)
+size = Vector2(100, 50)
