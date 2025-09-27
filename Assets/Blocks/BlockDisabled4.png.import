@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oqj2t1mnpvmq"
-path="res://.godot/imported/BlockDisabled5.jpg-100b7d5b34094158235eb41be1664b66.ctex"
+uid="uid://t7gkm4l6trbq"
+path="res://.godot/imported/BlockDisabled4.png-7a330adc076ed2901eab2c96ca11cf29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Blocks/BlockDisabled5.jpg"
-dest_files=["res://.godot/imported/BlockDisabled5.jpg-100b7d5b34094158235eb41be1664b66.ctex"]
+source_file="res://Assets/Blocks/BlockDisabled4.png"
+dest_files=["res://.godot/imported/BlockDisabled4.png-7a330adc076ed2901eab2c96ca11cf29.ctex"]
 
 [params]
 

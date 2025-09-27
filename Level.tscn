@@ -1,24 +1,33 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbrbck3u2wpb4"]
 
-[ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Player.tscn" id="1_bexhn"]
-[ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://TogglePlatform.tscn" id="2_t7iv1"]
+[ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
+[ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="2_t7iv1"]
 
 [node name="Level" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_bexhn")]
-position = Vector2(414, 149)
-
 [node name="TogglePlatform" parent="." instance=ExtResource("2_t7iv1")]
-position = Vector2(378, 374)
-rotation = 0.37350047
+position = Vector2(360, 377)
+rotation = 0.42062435
 platformRed = true
 
 [node name="TogglePlatform2" parent="." instance=ExtResource("2_t7iv1")]
-position = Vector2(650, 531)
-size = Vector2(150, 30)
+position = Vector2(418, 536)
+rotation = -0.38571778
+size = Vector2(100, 100)
 platformBlue = true
 
 [node name="TogglePlatform3" parent="." instance=ExtResource("2_t7iv1")]
-position = Vector2(419, 524)
-size = Vector2(100, 50)
-platformGreen = true
+position = Vector2(656, 543)
+size = Vector2(150, 30)
+platformYellow = true
+platformBlue = true
+
+[node name="TogglePlatform4" parent="." instance=ExtResource("2_t7iv1")]
+position = Vector2(652.00006, 417.00003)
+rotation = -0.44406772
+enabled = false
+platformRed = true
+platformBlue = true
+
+[node name="Player" parent="." instance=ExtResource("1_bexhn")]
+position = Vector2(414, 149)

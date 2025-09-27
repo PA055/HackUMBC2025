@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdcsytgshyoxq"]
 
-[ext_resource type="Script" uid="uid://dy7lx7ss3n71e" path="res://Scripts/platform_info.gd" id="1_4q6i3"]
-[ext_resource type="Texture2D" uid="uid://cnng35arw8o7" path="res://Assets/Blocks/BlockEnabled0.png" id="2_8bxei"]
+[ext_resource type="Script" uid="uid://dy7lx7ss3n71e" path="res://Scripts/toggle_platform.gd" id="1_4q6i3"]
+[ext_resource type="Texture2D" uid="uid://cx373xedbysrj" path="res://Assets/Blocks/BlockEnabled0.png" id="2_8bxei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bxei"]
-size = Vector2(200, 40)
+size = Vector2(150, 30)
 
 [node name="TogglePlatform" type="StaticBody2D"]
 script = ExtResource("1_4q6i3")
+enabled = true
 size = Vector2(200, 40)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
