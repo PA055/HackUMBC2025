@@ -16,7 +16,9 @@ platformRed = true
 [node name="TogglePlatform2" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(650, 531)
 size = Vector2(150, 30)
+platformBlue = true
 
 [node name="TogglePlatform3" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(419, 524)
 size = Vector2(100, 50)
+platformGreen = true
