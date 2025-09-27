@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cugpnwcwg01t4"]
+
+[ext_resource type="Texture2D" uid="uid://cgwyytayhu3r" path="res://Assets/Testing/circle.png" id="2_i3pqv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhfnw"]
+bounce = 0.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xhfnw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kne1u"]
+radius = 35.014282
+
+[node name="Player" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_xhfnw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.118, 0.118)
+sprite_frames = SubResource("SpriteFrames_xhfnw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kpjcp")
+
+[node name="MomentumCollider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MomentumCollider"]
+shape = SubResource("CircleShape2D_kne1u")
