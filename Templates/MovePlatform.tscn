@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c34cjhpd63fxo"]
+
+[ext_resource type="Script" uid="uid://cwqklrsflt3gb" path="res://Scripts/move_platform.gd" id="1_6ek54"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cd1ck"]
+
+[node name="MovePlatform" type="StaticBody2D"]
+script = ExtResource("1_6ek54")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cd1ck")
+
+[node name="Tracks" type="Node" parent="."]
