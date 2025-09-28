@@ -1,18 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://c34cjhpd63fxo"]
+[gd_scene load_steps=7 format=3 uid="uid://c34cjhpd63fxo"]
 
 [ext_resource type="Script" uid="uid://cwqklrsflt3gb" path="res://Scripts/move_platform.gd" id="1_6ek54"]
 [ext_resource type="Script" uid="uid://cv05gq6kl4txe" path="res://Scripts/move_wrapper.gd" id="1_f7s8w"]
 [ext_resource type="Texture2D" uid="uid://b81bptfexjt0c" path="res://Assets/Testing/arrow.png" id="3_dmfct"]
 [ext_resource type="Texture2D" uid="uid://bn510gcsfequb" path="res://Assets/MoveBlocks/Block0.png" id="3_f7s8w"]
 
+[sub_resource type="Curve" id="Curve_f7s8w"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15324725, 0.027958274), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7s8w"]
 
 [node name="MovePlatform" type="Node2D"]
 script = ExtResource("1_f7s8w")
 positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 200), Vector2(500, 200)])
+animationDuration = null
+animationCurve = SubResource("Curve_f7s8w")
 size = Vector2(200, 40)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_6ek54")
 positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 200), Vector2(500, 200)])
 size = Vector2(200, 40)

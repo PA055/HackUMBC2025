@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cugpnwcwg01t4"]
+[gd_scene load_steps=7 format=3 uid="uid://cugpnwcwg01t4"]
 
+[ext_resource type="Script" uid="uid://boicuoe8pkxlg" path="res://Scripts/player.gd" id="1_j6awe"]
 [ext_resource type="Texture2D" uid="uid://cgwyytayhu3r" path="res://Assets/Testing/circle.png" id="2_i3pqv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhfnw"]
@@ -23,7 +24,9 @@ radius = 15.0
 radius = 35.014282
 
 [node name="Player" type="RigidBody2D"]
+collision_mask = 12
 physics_material_override = SubResource("PhysicsMaterial_xhfnw")
+script = ExtResource("1_j6awe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.118, 0.118)
@@ -33,6 +36,10 @@ sprite_frames = SubResource("SpriteFrames_xhfnw")
 shape = SubResource("CircleShape2D_kpjcp")
 
 [node name="MomentumCollider" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MomentumCollider"]
 shape = SubResource("CircleShape2D_kne1u")
+
+[connection signal="area_entered" from="MomentumCollider" to="." method="_on_momentum_collider_area_entered"]

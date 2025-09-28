@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbrbck3u2wpb4"]
+[gd_scene load_steps=5 format=3 uid="uid://bbrbck3u2wpb4"]
 
 [ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
 [ext_resource type="PackedScene" uid="uid://c34cjhpd63fxo" path="res://Templates/MovePlatform.tscn" id="2_2nifc"]
 [ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="2_t7iv1"]
+
+[sub_resource type="Curve" id="Curve_2nifc"]
+_data = [Vector2(0, 0), 0.0, 0.17640252, 0, 0, Vector2(0.47924638, 0.33326024), 1.4574956, 1.4574956, 0, 0, Vector2(1, 1), 0.57787484, 0.0, 0, 0]
+point_count = 3
 
 [node name="Level" type="Node2D"]
 
@@ -36,14 +40,16 @@ platformBlue = true
 [node name="MovePlatform" parent="." instance=ExtResource("2_2nifc")]
 position = Vector2(92, 302)
 positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 100), Vector2(0, 0), Vector2(0, 0), Vector2(0, -200), Vector2(0, 0)])
+animationDuration = 0.5
 platformYellow = true
-
-[node name="Player" parent="." instance=ExtResource("1_bexhn")]
-position = Vector2(414, 149)
 
 [node name="MovePlatform2" parent="." instance=ExtResource("2_2nifc")]
 position = Vector2(848, 178)
 positions = Array[Vector2]([Vector2(0, 0), Vector2(0, 400), Vector2(-500, 400)])
-currentPosition = 2
+animationDuration = 0.2
+animationCurve = SubResource("Curve_2nifc")
 platformRed = true
 platformBlue = true
+
+[node name="Player" parent="." instance=ExtResource("1_bexhn")]
+position = Vector2(414, 149)

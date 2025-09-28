@@ -53,7 +53,7 @@ func _ready() -> void:
 		$CollisionShape2D.shape.size = _size;
 		$NinePatchRect.size = _size / $NinePatchRect.scale;
 		$NinePatchRect.position = -_size * 0.5;
-		set_collision_layer(1 if enabled else 2);
+		set_collision_layer(4 if enabled else 0);
 		$NinePatchRect.texture = load(
 			   "res://Assets/ToggleBlocks/Block"
 			+ ("Enabled" if enabled else "Disabled")
@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 	
 	if toggle:
 		enabled = not enabled;
-		set_collision_layer(1 if enabled else 2);
+		set_collision_layer(4 if enabled else 0);
 		$NinePatchRect.texture = load(
 			   "res://Assets/ToggleBlocks/Block"
 			+ ("Enabled" if enabled else "Disabled")

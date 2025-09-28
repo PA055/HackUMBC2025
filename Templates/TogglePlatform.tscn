@@ -7,6 +7,7 @@
 size = Vector2(150, 30)
 
 [node name="TogglePlatform" type="StaticBody2D"]
+collision_layer = 8
 script = ExtResource("1_4q6i3")
 enabled = true
 size = Vector2(200, 40)

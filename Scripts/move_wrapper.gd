@@ -23,6 +23,9 @@ var _currentPosition: int;
 		if Engine.is_editor_hint():
 			$StaticBody2D.currentPosition = new;
 
+@export var animationDuration: float = 0.5;
+@export var animationCurve: Curve;
+
 var _size: Vector2;
 @export var size: Vector2:
 	get:
@@ -73,7 +76,10 @@ func _ready() -> void:
 	
 	$StaticBody2D.positions = positions;
 	$StaticBody2D.currentPosition = currentPosition;
+	$StaticBody2D.animationDuration = animationDuration;
+	$StaticBody2D.animationCurve = animationCurve
 	$StaticBody2D.size = size;
 	$StaticBody2D.platformRed = platformRed;
 	$StaticBody2D.platformYellow = platformYellow;
 	$StaticBody2D.platformBlue = platformBlue;
+	$StaticBody2D.initialize();
