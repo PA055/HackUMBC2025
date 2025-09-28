@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbrbck3u2wpb4"]
+[gd_scene load_steps=5 format=3 uid="uid://bbrbck3u2wpb4"]
 
 [ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
 [ext_resource type="PackedScene" uid="uid://c34cjhpd63fxo" path="res://Templates/MovePlatform.tscn" id="2_2nifc"]
 [ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="2_t7iv1"]
+[ext_resource type="Script" uid="uid://b5xq4wknvyqp6" path="res://Scripts/camera_2d.gd" id="3_wkftn"]
 
 [node name="Level" type="Node2D"]
 
@@ -22,6 +23,13 @@ platformRed = true
 
 [node name="Player" parent="." instance=ExtResource("1_bexhn")]
 position = Vector2(414, 149)
+can_sleep = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 322)
+ignore_rotation = false
+zoom = Vector2(6.43, 6.43)
+script = ExtResource("3_wkftn")
 
 [node name="TogglePlatform" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(909, 281)
