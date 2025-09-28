@@ -9,16 +9,19 @@
 [node name="TogglePlatform" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(360, 377)
 rotation = 0.42062435
+enabled = false
 platformRed = true
 
 [node name="TogglePlatform2" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(418, 536)
 rotation = -0.38571778
+enabled = false
 size = Vector2(100, 100)
 platformBlue = true
 
 [node name="TogglePlatform3" parent="." instance=ExtResource("2_t7iv1")]
 position = Vector2(656, 543)
+enabled = false
 size = Vector2(150, 30)
 platformYellow = true
 platformBlue = true
@@ -33,7 +36,14 @@ platformBlue = true
 [node name="MovePlatform" parent="." instance=ExtResource("2_2nifc")]
 position = Vector2(92, 302)
 positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 100), Vector2(0, 0), Vector2(0, 0), Vector2(0, -200), Vector2(0, 0)])
-platformYellow = false
+platformYellow = true
 
 [node name="Player" parent="." instance=ExtResource("1_bexhn")]
 position = Vector2(414, 149)
+
+[node name="MovePlatform2" parent="." instance=ExtResource("2_2nifc")]
+position = Vector2(848, 178)
+positions = Array[Vector2]([Vector2(0, 0), Vector2(0, 400), Vector2(-500, 400)])
+currentPosition = 2
+platformRed = true
+platformBlue = true
