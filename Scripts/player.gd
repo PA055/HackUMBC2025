@@ -1,27 +1,20 @@
 extends RigidBody2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
+@export var velocityMultiplier: float = 1
+@export var boostCooldown: float = 0.75
+var boostCooldownLeft = 0;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var frameIndex :int=0;
 func _process(delta: float) -> void:
+	boostCooldownLeft -= delta;
 	var sprite = $AnimatedSprite2D;
 	if sprite.animation != "roll":
 		sprite.animation = "roll"
 		sprite.play()
-	
-	
-	if sprite.frame == sprite.frames.get_frame_count("roll") - 1:
-		sprite.stop()  # stops at last frame
-	
-	
 
-func _on_momentum_collider_area_entered(area: Area2D) -> void:
-	print("collided with move? ", area.name);
-	apply_central_force(area.next_velocity())
-	
 func _on_momentum_collider_body_entered(body: Node2D) -> void:
-	pass
+	if boostCooldownLeft <= 0:
+		var force: Vector2 = body.next_velocity() * velocityMultiplier;
+		if force.length_squared() > 0:
+			boostCooldownLeft = boostCooldown;
+		apply_central_force(force);

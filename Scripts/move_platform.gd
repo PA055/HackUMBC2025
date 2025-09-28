@@ -1,5 +1,5 @@
 @tool
-extends StaticBody2D
+extends CharacterBody2D
 
 @export var positions: Array[Vector2] = [Vector2()];
 

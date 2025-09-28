@@ -5,23 +5,23 @@ var _positions: Array[Vector2];
 @export var positions: Array[Vector2]:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.positions;
+			return $CharacterBody2D.positions;
 		return _positions;
 	set(new):
 		_positions = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.positions = new;
+			$CharacterBody2D.positions = new;
 
 var _currentPosition: int;
 @export var currentPosition: int:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.currentPosition;
+			return $CharacterBody2D.currentPosition;
 		return _currentPosition;
 	set(new):
 		currentPosition = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.currentPosition = new;
+			$CharacterBody2D.currentPosition = new;
 
 @export var animationDuration: float = 0.5;
 @export var animationCurve: Curve;
@@ -30,56 +30,56 @@ var _size: Vector2;
 @export var size: Vector2:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.size;
+			return $CharacterBody2D.size;
 		return _size;
 	set(new):
 		_size = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.size = new;
+			$CharacterBody2D.size = new;
 
 var _red: bool;
 @export var platformRed: bool:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.platformRed;
+			return $CharacterBody2D.platformRed;
 		return _red;
 	set(new):
 		_red = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.platformRed = new;
+			$CharacterBody2D.platformRed = new;
 
 var _yellow: bool;
 @export var platformYellow: bool:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.platformYellow;
+			return $CharacterBody2D.platformYellow;
 		return _yellow;
 	set(new):
 		_yellow = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.platformYellow = new;
+			$CharacterBody2D.platformYellow = new;
 
 var _blue: bool;
 @export var platformBlue: bool:
 	get:
 		if Engine.is_editor_hint():
-			return $StaticBody2D.platformBlue;
+			return $CharacterBody2D.platformBlue;
 		return _blue;
 	set(new):
 		_blue = new;
 		if Engine.is_editor_hint():
-			$StaticBody2D.platformBlue = new;
+			$CharacterBody2D.platformBlue = new;
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	$StaticBody2D.positions = positions;
-	$StaticBody2D.currentPosition = currentPosition;
-	$StaticBody2D.animationDuration = animationDuration;
-	$StaticBody2D.animationCurve = animationCurve
-	$StaticBody2D.size = size;
-	$StaticBody2D.platformRed = platformRed;
-	$StaticBody2D.platformYellow = platformYellow;
-	$StaticBody2D.platformBlue = platformBlue;
-	$StaticBody2D.initialize();
+	$CharacterBody2D.positions = positions;
+	$CharacterBody2D.currentPosition = currentPosition;
+	$CharacterBody2D.animationDuration = animationDuration;
+	$CharacterBody2D.animationCurve = animationCurve
+	$CharacterBody2D.size = size;
+	$CharacterBody2D.platformRed = platformRed;
+	$CharacterBody2D.platformYellow = platformYellow;
+	$CharacterBody2D.platformBlue = platformBlue;
+	$CharacterBody2D.initialize();
