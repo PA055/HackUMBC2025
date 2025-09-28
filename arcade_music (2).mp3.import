@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buuvnwbokytdv"
+path="res://.godot/imported/arcade_music (2).mp3-0ab5992acba1e6b4cabb5e6a34630725.mp3str"
+
+[deps]
+
+source_file="res://arcade_music (2).mp3"
+dest_files=["res://.godot/imported/arcade_music (2).mp3-0ab5992acba1e6b4cabb5e6a34630725.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

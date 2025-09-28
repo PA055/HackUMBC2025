@@ -8,6 +8,7 @@ extends Node2D
 	set(new):
 		level = new;
 @export_tool_button("Load Level", "Load") var load_level_action = load_level
+@export_tool_button("Print Tree", "VisualShaderNodeColorConstant") var print_tree_action = print_tree_pretty;
 
 @export var start: Vector2 = Vector2(50, 100):
 	get: return start;
@@ -17,94 +18,101 @@ extends Node2D
 @export var end: Vector2 = Vector2(950, 900);
 @export var bounds: Rect2 = Rect2(0, 0, 1000, 1000);
 
-class LevelData extends Resource:
-	@export_storage var movePlatforms: Array[MovePlatformData];
-	@export_storage var togglePlatforms: Array[TogglePlatformData];
-	@export_storage var start: Vector2;
-	@export_storage var end: Vector2;
-	@export_storage var bounds: Rect2;
-	
-class PlatformData extends Resource:
-	@export_storage var position: Vector2;
-	@export_storage var rotation: float;
-	@export_storage var color: int;
-	@export_storage var size: Vector2;
-
-class MovePlatformData extends PlatformData:
-	@export_storage var positions: Array[Vector2];
-	@export_storage var startIndex: int;
-	@export_storage var animationDuration: float;
-	
-class TogglePlatformData extends PlatformData:
-	@export_storage var enabled: bool;
-
 func save_level():
-	var fp = "res://Levels/" + level.to_lower() + (".tres" if saveAsPlaintext else ".res");
+	var fp = "res://Levels/" + level.to_lower() + (".tres" if saveAsPlaintext else ".res")
 	
-	var data: LevelData = LevelData.new();
-	data.start = start;
-	data.end = end;
-	data.bounds = bounds;
+	var data: LevelData = LevelData.new()
+	data.start = start
+	data.end = end
+	data.bounds = bounds
+	
 	for node in get_children():
-		if node is StaticBody2D:
-			var nodeData: TogglePlatformData = TogglePlatformData.new();
-			nodeData.size = node.size;
-			nodeData.position = node.position;
-			nodeData.rotation = node.rotation;
-			nodeData.color = node.platformColor;
-			nodeData.enabled = node.enabled;
-		elif node is Node2D and node.has_node("CharacterBody2D"):
-			var nodeData: MovePlatformData = MovePlatformData.new();
-			nodeData.size = node.size;
-			nodeData.position = node.position;
-			nodeData.rotation = node.rotation;
-			nodeData.color = node.get_node("CharacterBody2D").platformColor;
-			nodeData.positions = node.positions;
-			nodeData.animationDuration = node.animationDuration;
-			nodeData.startIndex = node.startIndex;
-			data.movePlatforms.append(nodeData);
+		# Toggle platforms
+		if "enabled" in node:
+			var nodeData: TogglePlatformData = TogglePlatformData.new()
+			nodeData.size = node.size
+			nodeData.position = node.position
+			nodeData.rotation = node.rotation
+			nodeData.color = 0
+			if node.platformRed: nodeData.color |= 1
+			if node.platformYellow: nodeData.color |= 2
+			if node.platformBlue: nodeData.color |= 4
+			nodeData.enabled = node.enabled
+			data.togglePlatforms.append(nodeData)
+		
+		# Move platforms
+		elif "positions" in node:
+			var nodeData: MovePlatformData = MovePlatformData.new()
+			nodeData.size = node.size
+			nodeData.position = node.position
+			nodeData.rotation = node.rotation
+			nodeData.positions = node.positions
+			nodeData.animationDuration = node.animationDuration
+			nodeData.startIndex = node.startIndex
+			nodeData.color = 0
+			if node.platformRed: nodeData.color |= 1
+			if node.platformYellow: nodeData.color |= 2
+			if node.platformBlue: nodeData.color |= 4
+			data.movePlatforms.append(nodeData)
+		
 		else:
-			push_warning("Unknown node: ", node.name, ". Ignoring.");
+			push_warning("Unknown node: ", node.name, ". Ignoring.")
 	
-	ResourceSaver.save(data, fp);
-	print("saved level to ", fp);
+	ResourceSaver.save(data, fp)
+	print("Saved level to ", fp)
 
 func load_level():
-	var fp = "res://Levels/" + level.to_lower() + (".tres" if saveAsPlaintext else ".res");
+	var fp = "res://Levels/" + level.to_lower() + (".tres" if saveAsPlaintext else ".res")
 	if not ResourceLoader.exists(fp):
-		push_error("File does not exist: ", fp);
-		return;
+		push_error("File does not exist: " + fp)
+		return
 	
-	var data = ResourceLoader.load(fp);
-	start = data.start;
-	end = data.end;
-	bounds = data.bounds;
+	var data = ResourceLoader.load(fp) as LevelData
+	start = data.start
+	end = data.end
+	bounds = data.bounds
 	
+	# Clear existing platforms
 	for child in get_children():
 		child.queue_free()
 		
-	var togglePlatformScene = preload("res://Templates/TogglePlatform.tscn");
-	var movePlatformScene = preload("res://Templates/MovePlatform.tscn");
+	# Load TogglePlatforms
+	var togglePlatformScene = preload("res://Templates/TogglePlatform.tscn")
 	for togglePlatform in data.togglePlatforms:
-		var platform = togglePlatformScene.instantiate();
-		platform.size = togglePlatform.size;
-		platform.position = togglePlatform.position;
-		platform.rotation = togglePlatform.rotation;
-		platform.platformColor = togglePlatform.color;
-		platform.enabled = togglePlatform.enabled;
-		add_child(platform);
+		var platform = togglePlatformScene.instantiate()
+		add_child(platform)
+		platform.owner = get_tree().edited_scene_root
+		
+		# Set exported properties (after adding to tree)
+		platform.size = togglePlatform.size
+		platform.position = togglePlatform.position
+		platform.rotation = togglePlatform.rotation
+		platform.platformColor = togglePlatform.color
+		platform.enabled = togglePlatform.enabled
 	
+	# Load MovePlatforms
+	var movePlatformScene = preload("res://Templates/MovePlatform.tscn")
 	for movePlatform in data.movePlatforms:
-		var platform = movePlatformScene.instantiate();
-		platform.size = movePlatform.size;
-		platform.position = movePlatform.position;
-		platform.rotation = movePlatform.rotation;
-		platform.find_child("CharacterBody2D").platformColor = movePlatform.color;
-		platform.positions = movePlatform.positions;
-		platform.animationDuration = movePlatform.animationDuration;
-		platform.startIndex = movePlatform.startIndex;
-		add_child(platform);
+		var platform = movePlatformScene.instantiate()
+		add_child(platform)
+		platform.owner = get_tree().edited_scene_root
+		
+		# Set exported properties through wrappers
+		platform.size = movePlatform.size
+		platform.position = movePlatform.position
+		platform.rotation = movePlatform.rotation
+		platform.positions = movePlatform.positions
+		platform.animationDuration = movePlatform.animationDuration
+		platform.startIndex = movePlatform.startIndex
+		
+		# Set colors through wrapper
+		platform.platformRed = bool(movePlatform.color & 1)
+		platform.platformYellow = bool(movePlatform.color & 2)
+		platform.platformBlue = bool(movePlatform.color & 4)
+		
+		# Initialize the platform (updates tracks, NinePatchRect, etc.)
+		platform._ready()  # Or platform.initialize() if you prefer
 
 func _ready() -> void:
-	# load_level();
+	load_level();
 	pass
