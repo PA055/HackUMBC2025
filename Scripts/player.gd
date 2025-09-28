@@ -12,11 +12,11 @@ var boostCooldownLeft = 0;
 func _ready() -> void:
 	var file = FileAccess.open("res://Debug/path.txt", FileAccess.WRITE);
 	if file: file.close();
+	$AudioStreamPlayer2D.play();
 	$AnimatedSprite2D.play("transition");
 
 func _process(delta: float) -> void:
 	boostCooldownLeft -= delta;
-	
 	waypointCooldownLeft -= delta;
 	if recordPath and waypointCooldownLeft <= 0:
 		var file: FileAccess;
@@ -30,7 +30,8 @@ func _process(delta: float) -> void:
 		file.close();
 	
 	if not $AnimatedSprite2D.is_playing():
-		$AnimatedSprite2D.rotate(8 * delta)
+		$AnimatedSprite2D.rotate(10 * delta)
+
 
 func _input(event: InputEvent) -> void:
 	if not recordPath:

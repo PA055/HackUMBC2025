@@ -75,7 +75,7 @@ func load_level():
 		push_error("File does not exist: ", fp);
 		return;
 	
-	var data: LevelData = ResourceLoader.load(fp);
+	var data = ResourceLoader.load(fp);
 	start = data.start;
 	end = data.end;
 	bounds = data.bounds;
@@ -106,4 +106,5 @@ func load_level():
 		add_child(platform);
 
 func _ready() -> void:
-	load_level();
+	# load_level();
+	pass

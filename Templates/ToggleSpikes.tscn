@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b55m0wfeeu2dv"]
+
+[ext_resource type="Texture2D" uid="uid://ikixtupsptbl" path="res://Assets/Spikes/spike0.png" id="1_onv5r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dec5l"]
+size = Vector2(7, 8)
+
+[node name="ToggleSpikes" type="StaticBody2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 32.5
+offset_bottom = 32.5
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_onv5r")
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_dec5l")
