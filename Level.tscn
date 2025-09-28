@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://nap3mccexd6l"]
+[gd_scene load_steps=14 format=3 uid="uid://nap3mccexd6l"]
 
 [ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
 [ext_resource type="PackedScene" uid="uid://c34cjhpd63fxo" path="res://Templates/MovePlatform.tscn" id="2_2nifc"]
 [ext_resource type="Texture2D" uid="uid://pyymabyjy7jp" path="res://Assets/Testing/dash.png" id="2_q4iis"]
 [ext_resource type="Script" uid="uid://dgte7coweitlt" path="res://Scripts/level_loader.gd" id="2_t7iv1"]
-[ext_resource type="Script" uid="uid://bdntxeu7fmr70" path="res://Scripts/path_display.gd" id="3_m3clv"]
+[ext_resource type="Script" path="res://Scripts/path_display.gd" id="3_m3clv"]
 [ext_resource type="Texture2D" uid="uid://psautoh27fv" path="res://Assets/UI/Background.png" id="3_q4iis"]
 [ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="3_wkftn"]
-[ext_resource type="AudioStream" uid="uid://b68py0j7u0jli" path="res://Assets/Sounds/theme.mp3" id="5_q4iis"]
+[ext_resource type="Texture2D" uid="uid://he0s4kpkcf5a" path="res://goal.png" id="4_d6u53"]
+[ext_resource type="Script" uid="uid://o461bpu5gmu" path="res://Scripts/goal.gd" id="5_sypgb"]
+[ext_resource type="Script" uid="uid://c1wmsqf5267dt" path="res://Scripts/collision_shape_2d.gd" id="6_dn5x0"]
 [ext_resource type="Script" uid="uid://b7th1tfxk4rkn" path="res://camera_follower.gd" id="8_86ljf"]
+[ext_resource type="AudioStream" uid="uid://buuvnwbokytdv" path="res://arcade_music (2).mp3" id="8_d6u53"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esphl"]
+radius = 28.0
 
 [node name="Level" type="Node2D"]
 
@@ -55,15 +61,23 @@ animationDuration = 0.25
 platformYellow = true
 platformBlue = true
 
+[node name="Goal" type="Sprite2D" parent="LevelLoader"]
+scale = Vector2(1.275, 1.225)
+texture = ExtResource("4_d6u53")
+script = ExtResource("5_sypgb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelLoader/Goal"]
+scale = Vector2(0.78431374, 0.8163265)
+shape = SubResource("CircleShape2D_esphl")
+script = ExtResource("6_dn5x0")
+
 [node name="Player" parent="." instance=ExtResource("1_bexhn")]
 position = Vector2(50, 100)
 recordPath = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(-50, -100)
-stream = ExtResource("5_q4iis")
-volume_db = -0.954
-area_mask = 65535
+stream = ExtResource("8_d6u53")
+autoplay = true
 
 [node name="PathDisplay" type="Line2D" parent="."]
 texture_repeat = 2
