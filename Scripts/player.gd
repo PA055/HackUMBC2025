@@ -9,11 +9,11 @@ var waypointCooldownLeft = 0;
 @export var boostCooldown: float = 0.75
 var boostCooldownLeft = 0;
 
+var started: int = -1;
+
 func _ready() -> void:
-	var file = FileAccess.open("res://Debug/path.txt", FileAccess.WRITE);
-	if file: file.close();
+	freeze = true;
 	$AudioStreamPlayer2D.play();
-	$AnimatedSprite2D.play("transition");
 
 func _on_body_entered(body: CollisionShape2D) -> void:
 		if body.is_in_group("Goal"):
@@ -25,7 +25,7 @@ func _on_body_entered(body: CollisionShape2D) -> void:
 func _process(delta: float) -> void:
 	boostCooldownLeft -= delta;
 	waypointCooldownLeft -= delta;
-	if recordPath and waypointCooldownLeft <= 0:
+	if recordPath and started == 1 and waypointCooldownLeft <= 0:
 		var file: FileAccess;
 		var fp = "res://Debug/path.txt"
 		if FileAccess.file_exists(fp):
@@ -36,28 +36,20 @@ func _process(delta: float) -> void:
 		file.store_string(str(position) + "\n");
 		file.close();
 	
-	if not $AnimatedSprite2D.is_playing():
+	if started == 0:
+		started = 1;
+		var file = FileAccess.open("res://Debug/path.txt", FileAccess.WRITE);
+		if file: file.close();
+		$AnimatedSprite2D.play("transition");
+	
+	if $AnimatedSprite2D.animation == "transition" and not $AnimatedSprite2D.is_playing():
 		$AnimatedSprite2D.rotate(10 * delta)
-		
-		
-
-
 	
-	
-		#reset
-	
-		
-	if (position.y < 100) or (position.y > 999000) or (position.x < -500) or (position.x > 2500):
-		print("you died")
-		position.y = 600
-		get_tree().reload_current_scene()
-	if position.x >1050 and position.x < 1150 and position.y>850 and position.y < 950:
-		print("You win!")
-		position.y = 600
-		get_tree().reload_current_scene()
-		
-		
-
+	var bounds: Rect2 = $"../LevelLoader".bounds.grow(50);
+	print(global_position);
+	print(bounds);
+	if not bounds.has_point(global_position):
+		get_tree().reload_current_scene();
 
 func _input(event: InputEvent) -> void:
 	if not recordPath:
@@ -98,6 +90,11 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("Reset"):
 		get_tree().reload_current_scene();
+		
+	if started == -1 and event.is_action_pressed("Start"):
+		started = 0;
+		$AnimatedSprite2D.animation = "idle";
+		set_deferred("freeze", false);
 
 func _on_momentum_collider_body_entered(body: Node2D) -> void:
 	if boostCooldownLeft <= 0 and body is CharacterBody2D:
@@ -109,3 +106,6 @@ func _on_momentum_collider_body_entered(body: Node2D) -> void:
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if $AnimatedSprite2D.animation == "transition" && $AnimatedSprite2D.frame == 5:
 		$AnimatedSprite2D.stop();
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	get_tree().change_scene_to_file("res://MainMenu.tscn");
