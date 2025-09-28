@@ -15,6 +15,13 @@ func _ready() -> void:
 	$AudioStreamPlayer2D.play();
 	$AnimatedSprite2D.play("transition");
 
+func _on_body_entered(body: CollisionShape2D) -> void:
+		if body.is_in_group("Goal"):
+			print("level passed")
+			position.x = 600
+			position.y = 1200
+			pass
+
 func _process(delta: float) -> void:
 	boostCooldownLeft -= delta;
 	waypointCooldownLeft -= delta;
@@ -31,6 +38,25 @@ func _process(delta: float) -> void:
 	
 	if not $AnimatedSprite2D.is_playing():
 		$AnimatedSprite2D.rotate(10 * delta)
+		
+		
+
+
+	
+	
+		#reset
+	
+		
+	if (position.y < 100) or (position.y > 999000) or (position.x < -500) or (position.x > 2500):
+		print("you died")
+		position.y = 600
+		get_tree().reload_current_scene()
+	if position.x >1050 and position.x < 1150 and position.y>850 and position.y < 950:
+		print("You win!")
+		position.y = 600
+		get_tree().reload_current_scene()
+		
+		
 
 
 func _input(event: InputEvent) -> void:

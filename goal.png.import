@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://he0s4kpkcf5a"
-path="res://.godot/imported/goal.png-e405d3ca8b50495d2b0a4e851701fd6a.ctex"
+path="res://.godot/imported/goal.png-d8026b4c83cd0c976a2c07258ba1a29e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/goal.png"
-dest_files=["res://.godot/imported/goal.png-e405d3ca8b50495d2b0a4e851701fd6a.ctex"]
+source_file="res://goal.png"
+dest_files=["res://.godot/imported/goal.png-d8026b4c83cd0c976a2c07258ba1a29e.ctex"]
 
 [params]
 
