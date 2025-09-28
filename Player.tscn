@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dynmtrjmeoc50"]
+[gd_scene load_steps=15 format=3 uid="uid://dynmtrjmeoc50"]
 
 [ext_resource type="Texture2D" uid="uid://c5ylm2qdutl3l" path="res://Assets/Player/Transition/roll0000.png" id="2_wi0c6"]
 [ext_resource type="Texture2D" uid="uid://cr0aahvrlc360" path="res://Assets/Player/Transition/roll0001.png" id="3_hp6x6"]
@@ -14,6 +14,26 @@ bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kne1u"]
 radius = 35.014282
+
+[sub_resource type="Animation" id="Animation_5ncpa"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wi0c6"]
+_data = {
+&"new_animation": SubResource("Animation_5ncpa")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ncpa"]
 animations = [{
@@ -59,6 +79,9 @@ physics_material_override = SubResource("PhysicsMaterial_xhfnw")
 shape = SubResource("CircleShape2D_kne1u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wi0c6")
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-0.43699998, 0.43699896)
