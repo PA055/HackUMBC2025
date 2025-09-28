@@ -8,7 +8,7 @@ var _enabled: bool = true
 		_enabled = new;
 		if Engine.is_editor_hint() and $NinePatchRect:
 			$NinePatchRect.texture = load(
-				   "res://Assets/Blocks/Block"
+				   "res://Assets/ToggleBlocks/Block"
 				+ ("Enabled" if enabled else "Disabled")
 				+ str(platformColor)
 				+ ".png"
@@ -41,7 +41,7 @@ func _on_edit_color(color: ColorMask, new: bool):
 	platformColor = (platformColor & ~color) | (color if new else 0);
 	if Engine.is_editor_hint() and $NinePatchRect:
 		$NinePatchRect.texture = load(
-			   "res://Assets/Blocks/Block"
+			   "res://Assets/ToggleBlocks/Block"
 			+ ("Enabled" if enabled else "Disabled")
 			+ str(platformColor)
 			+ ".png"
@@ -55,7 +55,7 @@ func _ready() -> void:
 		$NinePatchRect.position = -_size * 0.5;
 		set_collision_layer(1 if enabled else 2);
 		$NinePatchRect.texture = load(
-			   "res://Assets/Blocks/Block"
+			   "res://Assets/ToggleBlocks/Block"
 			+ ("Enabled" if enabled else "Disabled")
 			+ str(platformColor)
 			+ ".png"
@@ -74,7 +74,7 @@ func _input(event: InputEvent) -> void:
 		enabled = not enabled;
 		set_collision_layer(1 if enabled else 2);
 		$NinePatchRect.texture = load(
-			   "res://Assets/Blocks/Block"
+			   "res://Assets/ToggleBlocks/Block"
 			+ ("Enabled" if enabled else "Disabled")
 			+ str(platformColor)
 			+ ".png"

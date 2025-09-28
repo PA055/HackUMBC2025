@@ -1,17 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://c34cjhpd63fxo"]
+[gd_scene load_steps=6 format=3 uid="uid://c34cjhpd63fxo"]
 
 [ext_resource type="Script" uid="uid://cwqklrsflt3gb" path="res://Scripts/move_platform.gd" id="1_6ek54"]
+[ext_resource type="Script" uid="uid://cv05gq6kl4txe" path="res://Scripts/move_wrapper.gd" id="1_f7s8w"]
+[ext_resource type="Texture2D" uid="uid://duqdowwlyqbub" path="res://Assets/Testing/rectangle.png" id="2_cd1ck"]
+[ext_resource type="Texture2D" uid="uid://b81bptfexjt0c" path="res://Assets/Testing/arrow.png" id="3_dmfct"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cd1ck"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7s8w"]
 
-[node name="MovePlatform" type="StaticBody2D"]
+[node name="MovePlatform" type="Node2D"]
+script = ExtResource("1_f7s8w")
+positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 100)])
+size = Vector2(200, 40)
+platformRed = true
+platformYellow = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 script = ExtResource("1_6ek54")
+positions = Array[Vector2]([Vector2(0, 0), Vector2(500, 0), Vector2(500, 100)])
+size = Vector2(200, 40)
+platformColor = 3
+platformRed = true
+platformYellow = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Tracks" type="Node" parent="StaticBody2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cd1ck")
+[node name="NinePatchRect" type="NinePatchRect" parent="StaticBody2D"]
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+texture = ExtResource("2_cd1ck")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
 
-[node name="Tracks" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_f7s8w")
+
+[node name="Arrow" type="Sprite2D" parent="StaticBody2D"]
+rotation = 194.77875
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("3_dmfct")
