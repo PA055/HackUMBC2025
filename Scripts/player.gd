@@ -69,6 +69,9 @@ func _input(event: InputEvent) -> void:
 			file = FileAccess.open(fp, FileAccess.WRITE_READ)
 		file.store_string("key: 4\n");
 		file.close();
+		
+	if event.is_action_pressed("Reset"):
+		get_tree().reload_current_scene();
 
 func _on_momentum_collider_body_entered(body: Node2D) -> void:
 	if boostCooldownLeft <= 0 and body is CharacterBody2D:

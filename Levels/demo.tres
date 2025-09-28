@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=9 format=3 uid="uid://c1ktyu0b4w3v3"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=10 format=3 uid="uid://c1ktyu0b4w3v3"]
 
 [ext_resource type="Script" uid="uid://defi3bp8rwns2" path="res://Scripts/LevelData/move_platform_data.gd" id="1_v06ef"]
 [ext_resource type="Script" uid="uid://dqs8j60xltlli" path="res://Scripts/LevelData/level_data.gd" id="2_ess3b"]
@@ -45,10 +45,18 @@ rotation = 0.67718774
 color = 3
 size = Vector2(120, 30)
 
+[sub_resource type="Resource" id="Resource_kxtnp"]
+script = ExtResource("3_mqoqh")
+enabled = true
+position = Vector2(874.00006, 25.99997)
+rotation = -0.38139585
+color = 3
+size = Vector2(300, 40)
+
 [resource]
 script = ExtResource("2_ess3b")
 movePlatforms = Array[ExtResource("1_v06ef")]([SubResource("Resource_v06ef"), SubResource("Resource_ess3b")])
-togglePlatforms = Array[ExtResource("3_mqoqh")]([SubResource("Resource_mqoqh"), SubResource("Resource_0qpbm"), SubResource("Resource_i3anc")])
+togglePlatforms = Array[ExtResource("3_mqoqh")]([SubResource("Resource_mqoqh"), SubResource("Resource_0qpbm"), SubResource("Resource_i3anc"), SubResource("Resource_kxtnp")])
 start = Vector2(50, 100)
 end = Vector2(950, 900)
 bounds = Rect2(534, 313, 1000, 1000)

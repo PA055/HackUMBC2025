@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b55m0wfeeu2dv"]
+[gd_scene load_steps=4 format=3 uid="uid://b55m0wfeeu2dv"]
 
+[ext_resource type="Script" uid="uid://bm7o5mygp6sha" path="res://Scripts/toggle_spikes.gd" id="1_dec5l"]
 [ext_resource type="Texture2D" uid="uid://ikixtupsptbl" path="res://Assets/Spikes/spike0.png" id="1_onv5r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dec5l"]
 size = Vector2(7, 8)
 
 [node name="ToggleSpikes" type="StaticBody2D"]
+script = ExtResource("1_dec5l")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -7.5
