@@ -56,6 +56,28 @@ func _on_edit_color(color: ColorMask, new: bool):
 			+ ".png" \
 		);
 
+func _refresh_tracks(points: Array[Vector2]) -> void:
+	for child in $"../Tracks".get_children():
+		child.queue_free()
+	
+	for i in range(points.size()):
+		var start = points[i];
+		var end = points[(i + 1) % points.size()];
+		var line = Line2D.new();
+		line.points = [start, end];
+		line.texture = load("res://Assets/MoveBlocks/middle_track.png");
+		line.texture_mode = Line2D.LINE_TEXTURE_TILE;
+		line.width = 14
+		line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED;
+		$"../Tracks".add_child(line);
+	for point in points:
+		var sprite = Sprite2D.new();
+		sprite.texture = load("res://Assets/MoveBlocks/track_circle.png");
+		sprite.position = point;
+		sprite.scale = Vector2(0.65, 0.65);
+		$"../Tracks".add_child(sprite);
+	$"../Tracks".z_index = -5;
+
 func initialize() -> void:
 	if Engine.is_editor_hint():
 		return;
@@ -69,6 +91,7 @@ func initialize() -> void:
 		+ str(platformColor)
 		+ ".png"
 	);
+	_refresh_tracks(positions);
 
 func _input(event: InputEvent) -> void:
 	var toggle = false;
@@ -103,7 +126,8 @@ func next_velocity(start: Vector2, end: Vector2, dt: float, eps: float = 0.001) 
 	return (end - start) * (eased / animationDuration);
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint() and $CollisionShape2D:
+	if Engine.is_editor_hint() and $CollisionShape2D and $"../Tracks":
+		_refresh_tracks(positions);
 		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate();
 	else:
 		var prevPos = positions[_prevPos];

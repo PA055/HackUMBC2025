@@ -42,4 +42,4 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MomentumCollider"]
 shape = SubResource("CircleShape2D_kne1u")
 
-[connection signal="area_entered" from="MomentumCollider" to="." method="_on_momentum_collider_area_entered"]
+[connection signal="body_entered" from="MomentumCollider" to="." method="_on_momentum_collider_body_entered"]
