@@ -1,15 +1,21 @@
 extends RigidBody2D
 
+<<<<<<< HEAD
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimatedSprite2D.animation = "roll"
 	$AnimatedSprite2D.play()
 	pass
+=======
+@export var velocityMultiplier: float = 1
+@export var boostCooldown: float = 0.75
+var boostCooldownLeft = 0;
+>>>>>>> 0c007c789d03a11111afc1b3a1fde8698f9da784
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var frameIndex :int=0;
 func _process(delta: float) -> void:
+<<<<<<< HEAD
 	var sprite = $AnimatedSprite2D
 	#if sprite.animation != "roll":
 		#sprite.animation = "roll"
@@ -20,10 +26,17 @@ func _process(delta: float) -> void:
 	#	sprite.stop() 
 	
 	
+=======
+	boostCooldownLeft -= delta;
+	var sprite = $AnimatedSprite2D;
+	if sprite.animation != "roll":
+		sprite.animation = "roll"
+		sprite.play()
+>>>>>>> 0c007c789d03a11111afc1b3a1fde8698f9da784
 
-func _on_momentum_collider_area_entered(area: Area2D) -> void:
-	print("collided with move? ", area.name);
-	apply_central_force(area.next_velocity())
-	
 func _on_momentum_collider_body_entered(body: Node2D) -> void:
-	pass
+	if boostCooldownLeft <= 0:
+		var force: Vector2 = body.next_velocity() * velocityMultiplier;
+		if force.length_squared() > 0:
+			boostCooldownLeft = boostCooldown;
+		apply_central_force(force);
