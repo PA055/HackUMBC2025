@@ -96,7 +96,9 @@ func next_position(start: Vector2, end: Vector2, dt: float) -> Vector2:
 	var eased = animationCurve.sample(progress)
 	return lerp(start, end, eased);
 	
-func next_velocity(start: Vector2, end: Vector2, dt: float, eps: float = 0.001) -> Vector2:
+func next_velocity(eps: float = 0.001) -> Vector2:
+	var start = positions[_prevPos];
+	var end = positions[_currentPos];
 	var t1 = clamp(progress - eps, 0.0, 1.0)
 	var t2 = clamp(progress + eps, 0.0, 1.0)
 	var eased = (animationCurve.sample(t2) - animationCurve.sample(t1)) / (t2 - t1)
