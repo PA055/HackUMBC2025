@@ -43,12 +43,12 @@ enum ColorMask {RED = 1, YELLOW = 2, BLUE = 4};
 
 func _on_edit_color(color: ColorMask, new: bool):
 	platformColor = (platformColor & ~color) | (color if new else 0);
-	#if Engine.is_editor_hint() and $NinePatchRect:
-		#$NinePatchRect.texture = load(
-			   #"res://Assets/MoveBlocks/Block"
-			#+ str(platformColor)
-			#+ ".png"
-		#);
+	if Engine.is_editor_hint() and $NinePatchRect:
+		$NinePatchRect.texture = load(
+			   "res://Assets/MoveBlocks/Block"
+			+ str(platformColor)
+			+ ".png"
+		);
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -56,11 +56,11 @@ func _ready() -> void:
 		$CollisionShape2D.shape.size = _size;
 		$NinePatchRect.size = _size / $NinePatchRect.scale;
 		$NinePatchRect.position = -_size * 0.5;
-		#$NinePatchRect.texture = load(
-			   #"res://Assets/MoveBlocks/Block"
-			#+ str(platformColor)
-			#+ ".png"
-		#);
+		$NinePatchRect.texture = load(
+			   "res://Assets/MoveBlocks/Block"
+			+ str(platformColor)
+			+ ".png"
+		);
 
 func _input(event: InputEvent) -> void:
 	var toggle = false;
