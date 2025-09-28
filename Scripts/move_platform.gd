@@ -20,7 +20,7 @@ var _currentPos: int = 0;
 				$Arrow.texture = load("res://Assets/Testing/arrow.png");
 				$Arrow.look_at(positions[nextPos] + get_parent().position);
 
-@export var animationDuration: float = 0.5;
+@export var animationDuration: float = 0.25;
 @export var animationCurve: Curve;
 var progress: float;
 

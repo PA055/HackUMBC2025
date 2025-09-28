@@ -12,14 +12,14 @@ var _positions: Array[Vector2];
 		if Engine.is_editor_hint():
 			$CharacterBody2D.positions = new;
 
-var _currentPosition: int;
-@export var currentPosition: int:
+var _startIndex: int;
+@export var startIndex: int:
 	get:
 		if Engine.is_editor_hint():
 			return $CharacterBody2D.currentPosition;
-		return _currentPosition;
+		return _startIndex;
 	set(new):
-		currentPosition = new;
+		_startIndex = new;
 		if Engine.is_editor_hint():
 			$CharacterBody2D.currentPosition = new;
 
@@ -75,7 +75,7 @@ func _ready() -> void:
 		return
 	
 	$CharacterBody2D.positions = positions;
-	$CharacterBody2D.currentPosition = currentPosition;
+	$CharacterBody2D.currentPosition = startIndex;
 	$CharacterBody2D.animationDuration = animationDuration;
 	$CharacterBody2D.animationCurve = animationCurve
 	$CharacterBody2D.size = size;

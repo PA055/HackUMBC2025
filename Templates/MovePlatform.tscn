@@ -13,8 +13,9 @@ point_count = 3
 
 [node name="MovePlatform" type="Node2D"]
 script = ExtResource("1_f7s8w")
-animationDuration = null
+positions = Array[Vector2]([Vector2(0, 0)])
 animationCurve = SubResource("Curve_f7s8w")
+size = Vector2(200, 40)
 
 [node name="Tracks" type="Node2D" parent="."]
 z_index = -5
@@ -23,6 +24,7 @@ z_index = -5
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_6ek54")
+size = Vector2(200, 40)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CharacterBody2D"]
 offset_left = -100.0
