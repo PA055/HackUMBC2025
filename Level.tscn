@@ -1,28 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbrbck3u2wpb4"]
+[gd_scene load_steps=3 format=3 uid="uid://bbrbck3u2wpb4"]
 
 [ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
-[ext_resource type="PackedScene" uid="uid://c34cjhpd63fxo" path="res://Templates/MovePlatform.tscn" id="2_2nifc"]
-[ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="2_t7iv1"]
+[ext_resource type="Script" uid="uid://dgte7coweitlt" path="res://Scripts/level_loader.gd" id="2_t7iv1"]
 
 [node name="Level" type="Node2D"]
-
-[node name="MovePlatform" parent="." instance=ExtResource("2_2nifc")]
-position = Vector2(519, 454)
-positions = Array[Vector2]([Vector2(0, 0), Vector2(0, -100)])
-animationDuration = 0.25
-size = Vector2(200, 40)
-platformRed = true
-
-[node name="MovePlatform2" parent="." instance=ExtResource("2_2nifc")]
-position = Vector2(299, 334)
-positions = Array[Vector2]([Vector2(0, 0), Vector2(100, 0)])
-animationDuration = 0.25
-size = Vector2(40, 200)
-platformRed = true
 
 [node name="Player" parent="." instance=ExtResource("1_bexhn")]
 position = Vector2(414, 149)
 
-[node name="TogglePlatform" parent="." instance=ExtResource("2_t7iv1")]
-position = Vector2(909, 281)
-size = Vector2(40, 200)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(793, 362)
+
+[node name="LevelLoader" type="Node2D" parent="."]
+script = ExtResource("2_t7iv1")
