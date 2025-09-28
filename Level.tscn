@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-[gd_scene load_steps=5 format=3 uid="uid://bbrbck3u2wpb4"]
+[gd_scene load_steps=4 format=3 uid="uid://nap3mccexd6l"]
 
 [ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
-[ext_resource type="PackedScene" uid="uid://c34cjhpd63fxo" path="res://Templates/MovePlatform.tscn" id="2_2nifc"]
-[ext_resource type="PackedScene" uid="uid://cdcsytgshyoxq" path="res://Templates/TogglePlatform.tscn" id="2_t7iv1"]
+[ext_resource type="Script" path="res://Scripts/level_loader.gd" id="2_t7iv1"]
 [ext_resource type="Script" uid="uid://b5xq4wknvyqp6" path="res://Scripts/camera_2d.gd" id="3_wkftn"]
-=======
-[gd_scene load_steps=3 format=3 uid="uid://bbrbck3u2wpb4"]
-
-[ext_resource type="PackedScene" uid="uid://cugpnwcwg01t4" path="res://Templates/Player.tscn" id="1_bexhn"]
-[ext_resource type="Script" uid="uid://dgte7coweitlt" path="res://Scripts/level_loader.gd" id="2_t7iv1"]
->>>>>>> efc2d24597d8e300a01111215c5a7aa10b5c2f24
 
 [node name="Level" type="Node2D"]
 
@@ -21,11 +13,7 @@ can_sleep = false
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 322)
 ignore_rotation = false
-zoom = Vector2(6.43, 6.43)
 script = ExtResource("3_wkftn")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(793, 362)
 
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_t7iv1")
