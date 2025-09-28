@@ -7,7 +7,6 @@ var boostCooldownLeft = 0;
 func _ready() -> void:
 	$AnimatedSprite2D.play("transition");
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	boostCooldownLeft -= delta;
 	if not $AnimatedSprite2D.is_playing():
@@ -19,7 +18,6 @@ func _on_momentum_collider_body_entered(body: Node2D) -> void:
 		if force.length_squared() > 0:
 			boostCooldownLeft = boostCooldown;
 		apply_central_force(force);
-
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if $AnimatedSprite2D.animation == "transition" && $AnimatedSprite2D.frame == 5:
