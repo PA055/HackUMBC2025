@@ -17,6 +17,4 @@ func _process(delta: float) -> void:
 	
 	smoothed_pos.x = clamp(smoothed_pos.x, min_x, max_x)
 	smoothed_pos.y = clamp(smoothed_pos.y, min_y, max_y)
-	
-	print("goal: ", target.global_position, ", pos: ", smoothed_pos);
 	global_position = smoothed_pos

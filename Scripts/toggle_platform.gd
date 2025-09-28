@@ -1,65 +1,54 @@
 @tool
 extends StaticBody2D
 
+# --- Cache NinePatchRect child ---
+@onready var sprite: NinePatchRect = $NinePatchRect
+
+# --- Enabled state ---
 var _enabled: bool = true
 @export var enabled: bool:
 	get: return _enabled
-	set(new):
-		_enabled = new;
-		if Engine.is_editor_hint() and $NinePatchRect:
-			$NinePatchRect.texture = load(
-				   "res://Assets/ToggleBlocks/Block"
-				+ ("Enabled" if enabled else "Disabled")
-				+ str(platformColor)
-				+ ".png"
-			);
+	set(value):
+		_enabled = value
+		_update_visuals()
+		set_collision_layer(4 if _enabled else 0)
 
-var _size: Vector2 = Vector2(200, 40);
+# --- Size ---
+var _size: Vector2 = Vector2(200, 40)
 @export var size: Vector2:
-	get:
-		return _size
-	set(new):
-		_size = new;
-		if Engine.is_editor_hint() and $NinePatchRect:
-			$NinePatchRect.size = new / $NinePatchRect.scale;
-			$NinePatchRect.position = -new * 0.5;
+	get: return _size
+	set(value):
+		_size = value
+		_update_visuals()
 
-enum ColorMask {RED = 1, YELLOW = 2, BLUE = 4};
-var platformColor: int = 0;
+# --- Colors ---
+enum ColorMask {RED = 1, YELLOW = 2, BLUE = 4}
+var platformColor: int = 0
 
 @export var platformRed: bool:
-	get: return platformColor & ColorMask.RED;
-	set(new): _on_edit_color(ColorMask.RED, new);
+	get: return platformColor & ColorMask.RED
+	set(value): _on_edit_color(ColorMask.RED, value)
 @export var platformYellow: bool:
-	get: return platformColor & ColorMask.YELLOW;
-	set(new): _on_edit_color(ColorMask.YELLOW, new);
+	get: return platformColor & ColorMask.YELLOW
+	set(value): _on_edit_color(ColorMask.YELLOW, value)
 @export var platformBlue: bool:
-	get: return platformColor & ColorMask.BLUE;
-	set(new): _on_edit_color(ColorMask.BLUE, new);
+	get: return platformColor & ColorMask.BLUE
+	set(value): _on_edit_color(ColorMask.BLUE, value)
 
-func _on_edit_color(color: ColorMask, new: bool):
-	platformColor = (platformColor & ~color) | (color if new else 0);
-	if Engine.is_editor_hint() and $NinePatchRect:
-		$NinePatchRect.texture = load(
-			   "res://Assets/ToggleBlocks/Block"
-			+ ("Enabled" if enabled else "Disabled")
-			+ str(platformColor)
-			+ ".png"
-		);
+func _on_edit_color(color: ColorMask, value: bool):
+	platformColor = (platformColor & ~color) | (color if value else 0)
+	_update_visuals()
 
-func _ready() -> void:
-	if not Engine.is_editor_hint():
-		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate();
-		$CollisionShape2D.shape.size = _size;
-		$NinePatchRect.size = _size / $NinePatchRect.scale;
-		$NinePatchRect.position = -_size * 0.5;
-		set_collision_layer(4 if enabled else 0);
-		$NinePatchRect.texture = load(
-			   "res://Assets/ToggleBlocks/Block"
-			+ ("Enabled" if enabled else "Disabled")
-			+ str(platformColor)
-			+ ".png"
-		);
+func _update_visuals():
+	if sprite:
+		sprite.size = _size / sprite.scale
+		sprite.position = -_size * 0.5
+		sprite.texture = load(
+			"res://Assets/ToggleBlocks/Block" +
+			("Enabled" if _enabled else "Disabled") +
+			str(platformColor) +
+			".png"
+		)
 
 func _input(event: InputEvent) -> void:
 	var toggle = false;
@@ -72,14 +61,12 @@ func _input(event: InputEvent) -> void:
 	
 	if toggle:
 		enabled = not enabled;
-		set_collision_layer(4 if enabled else 0);
-		$NinePatchRect.texture = load(
-			   "res://Assets/ToggleBlocks/Block"
-			+ ("Enabled" if enabled else "Disabled")
-			+ str(platformColor)
-			+ ".png"
-		);
+		set_collision_layer(4 if _enabled else 0)
+		_update_visuals()
 
-func _process(_delta: float) -> void:
-	if Engine.is_editor_hint() and $CollisionShape2D:
-		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate();
+func _ready() -> void:
+	_update_visuals()
+	if not Engine.is_editor_hint():
+		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
+		$CollisionShape2D.shape.size = _size
+		set_collision_layer(4 if _enabled else 0)

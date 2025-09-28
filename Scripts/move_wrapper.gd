@@ -1,85 +1,82 @@
 @tool
 extends Node2D
 
-var _positions: Array[Vector2];
+# --- Cache CharacterBody2D child ---
+@onready var body: CharacterBody2D = $CharacterBody2D
+
+# --- Positions ---
+var _positions: Array[Vector2] = []
 @export var positions: Array[Vector2]:
 	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.positions;
-		return _positions;
-	set(new):
-		_positions = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.positions = new;
+		if Engine.is_editor_hint() and body:
+			return body.positions
+		return _positions
+	set(value):
+		_positions = value
+		if body:
+			body.positions = value
 
-var _startIndex: int;
+# --- Current Index ---
+var _startIndex: int = 0
 @export var startIndex: int:
 	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.currentPosition;
-		return _startIndex;
-	set(new):
-		_startIndex = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.currentPosition = new;
+		if Engine.is_editor_hint() and body:
+			return body.currentPosition
+		return _startIndex
+	set(value):
+		_startIndex = value
+		if body:
+			body.currentPosition = value
 
-@export var animationDuration: float = 0.5;
-@export var animationCurve: Curve;
+# --- Animation ---
+@export var animationDuration: float = 0.25
+@export var animationCurve: Curve
 
-var _size: Vector2;
+# --- Size ---
+var _size: Vector2 = Vector2(200, 40)
 @export var size: Vector2:
 	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.size;
-		return _size;
-	set(new):
-		_size = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.size = new;
+		if body:
+			return body.size
+		return _size
+	set(value):
+		_size = value
+		if body:
+			body.size = value
 
-var _red: bool;
+# --- Colors ---
+var _red: bool = false
 @export var platformRed: bool:
-	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.platformRed;
-		return _red;
-	set(new):
-		_red = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.platformRed = new;
+	get: return body and body.platformRed if Engine.is_editor_hint() else _red
+	set(value):
+		_red = value
+		if body:
+			body.platformRed = value
 
-var _yellow: bool;
+var _yellow: bool = false
 @export var platformYellow: bool:
-	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.platformYellow;
-		return _yellow;
-	set(new):
-		_yellow = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.platformYellow = new;
+	get: return body and body.platformYellow if Engine.is_editor_hint() else _yellow
+	set(value):
+		_yellow = value
+		if body:
+			body.platformYellow = value
 
-var _blue: bool;
+var _blue: bool = false
 @export var platformBlue: bool:
-	get:
-		if Engine.is_editor_hint():
-			return $CharacterBody2D.platformBlue;
-		return _blue;
-	set(new):
-		_blue = new;
-		if Engine.is_editor_hint():
-			$CharacterBody2D.platformBlue = new;
+	get: return body and body.platformBlue if Engine.is_editor_hint() else _blue
+	set(value):
+		_blue = value
+		if body:
+			body.platformBlue = value
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
-	
-	$CharacterBody2D.positions = positions;
-	$CharacterBody2D.currentPosition = startIndex;
-	$CharacterBody2D.animationDuration = animationDuration;
-	$CharacterBody2D.animationCurve = animationCurve
-	$CharacterBody2D.size = size;
-	$CharacterBody2D.platformRed = platformRed;
-	$CharacterBody2D.platformYellow = platformYellow;
-	$CharacterBody2D.platformBlue = platformBlue;
-	$CharacterBody2D.initialize();
+	if body:
+		body.positions = positions
+		body.currentPosition = startIndex
+		body.animationDuration = animationDuration
+		body.animationCurve = animationCurve
+		body.size = size
+		body.platformRed = platformRed
+		body.platformYellow = platformYellow
+		body.platformBlue = platformBlue
+		body.initialize()
