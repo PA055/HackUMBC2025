@@ -2,6 +2,7 @@ extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AudioStreamPlayer2D.play()
 	$AnimatedSprite2D.animation = "transition"
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.play("transition");
